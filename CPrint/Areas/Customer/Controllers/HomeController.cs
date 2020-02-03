@@ -6,9 +6,11 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using CPrint.Models;
+using CPrint.Models.ViewModels;
 
-namespace CPrint.Controllers
+namespace CPrint.Areas.Customer.Controllers
 {
+    [Area("Customer")]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
