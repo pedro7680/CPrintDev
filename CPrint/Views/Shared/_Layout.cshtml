@@ -4,8 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - CPrint APplication</title>
+    <!-- css for the website, bootstrap and standard site.css-->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <!-- links for using js utils-->
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
+    <!-- end of js utils-->
 </head>
 <body>
     <header>
@@ -38,11 +44,23 @@
 
     <footer class="border-top footer text-white-50 bg-primary">
         <div class="container">
-            &copy; 2020 - CPrint -  </div>
+            &copy; 2020 - CPrint -
+        </div>
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
+    <!-- JS scripts for extra utils to be used throughout the project-->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
+    <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+    <!-- using my personal fontawesome kit code 03a46c7808-->
+    <script src="https://kit.fontawesome.com/03a46c7808.js"></script>
+    <!-- end of font awesome -->
+
+    <!-- end of js utils -->
+
     @RenderSection("Scripts", required: false)
 </body>
 </html>
