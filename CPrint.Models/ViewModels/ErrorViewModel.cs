@@ -1,6 +1,6 @@
 using System;
 
-namespace CPrint.Models
+namespace CPrint.Models.ViewModels
 {
     public class ErrorViewModel
     {
