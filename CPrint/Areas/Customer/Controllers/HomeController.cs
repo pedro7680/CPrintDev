@@ -30,6 +30,53 @@ namespace CPrint.Areas.Customer.Controllers
             return View();
         }
 
+        // functions for all the navbar links
+        // products will require db and controller 
+        public IActionResult Products()
+        {
+            return View();
+        }
+
+        public IActionResult AboutUs()
+        {
+            return View();
+        }
+
+        public IActionResult Quotation()
+        {
+            return View();
+        }
+
+        public IActionResult Templates()
+        {
+            return View();
+        }
+
+        public IActionResult Bespoke()
+        {
+            return View();
+        }
+
+        public IActionResult Design()
+        {
+            return View();
+        }
+
+        public IActionResult FAQs()
+        {
+            return View();
+        }
+
+
+        public IActionResult ContactUs()
+        {
+            return View();
+        }
+
+
+
+
+
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()
         {
