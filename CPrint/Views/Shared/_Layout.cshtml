@@ -7,6 +7,8 @@
     <!-- css for the website, bootstrap and standard site.css-->
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="~/css/Style.css" />
+
     <!-- links for using js utils-->
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.16/css/jquery.dataTables.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css" />
@@ -15,7 +17,107 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
+        <!-- page top -->
+        <div class="top.header" style="background-color: #0c213a;">
+            <div class="container">
+                <div class="pre-htext">
+                    <p>Free Delivery on all orders over £150.00</p>
+                    <div class="ph-ul">
+                        <ul class="ml-auto">
+                            <li>
+                                <a href="tel:01506854033"><i class="fas fa-phone"></i> 01506 854033</a>
+                            </li>
+                            <!-- should be side by side-->
+                            <partial name="_LoginPartial" />
+                        </ul>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <nav class="navbar navbar-expand-lg navbar-light bg-light ">
+            <a class="navbar-brand" href="#"><img src="Images/logo.png"></a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <!-- ml-auto moves nav links to the right-->
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
+                    </li>
+
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Content Management
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+
+
+                    <li class="nav-item">
+                        <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+                    </li>
+                    <!-- dropdown List-->
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            Products
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" href="#">Another action</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Something else here</a>
+                        </div>
+                    </li>
+                    <!-- end drop down list-->
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Quotation</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Templates</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Bespoke</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">How to Order</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Design</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">FAQ's</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Contact Us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-cart-plus"></i>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">
+                            <i class="fas fa-search-plus"></i>
+                        </a>
+                    </li>
+
+
+                </ul>
+            </div>
+        </nav>
+        <!-- End of the nav bar -->
+        <!-- Bootstrap Template navbar - -REMOVE -->
+        @*<nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-primary border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">Curries Print Logo</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
@@ -23,7 +125,7 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
-                    <partial name="_LoginPartial" />
+
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
@@ -32,7 +134,7 @@
                             <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
                         </li>
 
-                        <!-- add in a Dropdown from bootstrap code -->
+                         add in a Dropdown from bootstrap code
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 Content Management
@@ -44,11 +146,360 @@
                                 <a class="dropdown-item" href="#">Something else here</a>
                             </div>
                         </li>
-                        <!-- end of dropdown-->
+                         end of dropdown
+                         add in a Dropdown from bootstrap code
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Products
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </li>
+                         end of dropdown
+                        <li class="nav-item">
+                            <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Quotation</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Privacy">Template</a>
+                        </li>
                     </ul>
                 </div>
             </div>
-        </nav>
+        </nav>*@
+        <!-- carousel needs fixed for when page size is reduced -->
+        <!-- image carousel-->
+        <div id="carouselExampleControls" class="carousel slide " data-ride="carousel">
+            <div class="carousel-inner">
+                <div class="carousel-item active">
+                    <img src="/images/carousel/BIG-Large-Format-Banner.png" class="d-block w-100" alt="...">
+                    <div class="container ">
+                        <div class="carousel-caption text-right">
+                            <h1>For all your big advertising Requirements. 1</h1>
+                            <p>Get a instant quote on Posters, Signage, Banners and Graphics. We specialise in providing the best with our UV Latex Inks.</p>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/carousel/BIG-Business-Cards-Banner-1.png" class="d-block w-100" alt="...">
+                    <div class="container">
+                        <div class="carousel-caption text-right">
+                            <h1>For all your big advertising Requirements. 2</h1>
+                            <p>Get a instant quote on Posters, Signage, Banners and Graphics. We specialise in providing the best with our UV Latex Inks.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <!-- carousel Item that will align the text to the right side-->
+                <div class="carousel-item">
+                    <img src="/images/carousel/BIG-Menu-Banner.png" class="d-block w-100" alt="...">
+                    <div class="carousel-caption">
+                        <h1 style="text-align: end;">test text 3</h1>
+                        <p style="text-align: end; color:black;">Lorem ipsum dolor sit amet consectetur adipisicing elit. Ipsum id inventore unde cupiditate dolorum earum ad autem ipsam recusandae, ullam ea reprehenderit pariatur architecto aspernatur delectus numquam omnis. Consequuntur, vel?</p>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/carousel/BIG-Posters-and-Leaflets-Banner.png" class="d-block w-100" alt="...">
+                    <div class="container">
+                        <div class="carousel-caption text-right">
+                            <h1>For all your big advertising Requirements. 4</h1>
+                            <p>Get a instant quote on Posters, Signage, Banners and Graphics. We specialise in providing the best with our UV Latex Inks.</p>
+
+                        </div>
+                    </div>
+                </div>
+                <div class="carousel-item">
+                    <img src="/images/carousel/BIG-Stationery-Banner-2.png" class="d-block w-100" alt="...">
+                    <div class="container">
+                        <div class="carousel-caption text-right">
+                            <h1>For all your big advertising Requirements. 5</h1>
+                            <p>Get a instant quote on Posters, Signage, Banners and Graphics. We specialise in providing the best with our UV Latex Inks.</p>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="sr-only">Previous</span>
+            </a>
+            <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="sr-only">Next</span>
+            </a>
+        </div>
+
+
+        <h2 style="text-align: center;">Our Products</h2>
+
+
+
+        <!-- button group is fine for big screens, doesnt resize correctly-->
+        <div class="text-center">
+            <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                <button type="button" class="btn btn-outline-primary btn-lg">Top Products</button>
+                <button type="button" class="btn btn-outline-dark btn-lg">Business Cards</button>
+                <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
+                <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
+                <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
+                <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
+                <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
+            </div>
+        </div>
+
+
+        <!-- this is for the the cards-->
+        <!-- we require 19 cards as per the guidelines. -->
+        <!-- FOREACH LOOP TO GET THE TOTAL NUBER OF PRODUCTS AND DISPLAY THE CATEGORIES-->
+        <!-- get category Id, category Name and the associated image.-->
+        <section>
+
+            <!-- bg-light removed to set background to dark blue-->
+            <div class="album py-5 ">
+                <div class="container">
+
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text text-center">Calendar Test</p>
+
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                        <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                        <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                        <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                        <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                        <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                        <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                        <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card mb-4 shadow-sm">
+                                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
+                                <div class="card-body">
+                                    <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div class="btn-group">
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
+                                            <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                        </div>
+                                        <small class="text-muted">9 mins</small>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+
+        <section>
+            <h1> testimonials require black arrows to cycle</h1>
+            <div class="testi-cont">
+                <div class="container">
+                    <div class="row">
+                        <div id="carouselExampleFade" class="carousel slide carousel-fade" data-ride="carousel">
+                            <div class="carousel-inner">
+
+
+
+                                <div class="carousel-item  active  testi-box">
+                                    <h1>  </h1>
+                                    <img class="img-fluid" src="http://s3-eu-west-1.amazonaws.com/curriesprintcentre/Hopetoun.png" alt="First slide">
+                                    <p>
+                                        We have been working with Currie&#039;s Print Centre for quite a long time now and our experience with them has been wonderful. Every advisor we have been in contact with has been very diligent and proactive, they do not only go through with simple requests, but also advise you on the best material and ways to present your work. Even when you only come with an unclear idea, they will help you bring it to life. Another important characteristic of their staff is their patience, they know to adapt to business requirements and approval times, always with a smile. We would definitely recommend Currie&#039;s Print Centre as printing and design partner for others business.
+                                    </p>
+                                    <h4>Camille Craig  | <span> Marketing Manager  </span></h4>
+                                </div>
+
+                                <div class="carousel-item  testi-box">
+                                    <h1>  </h1>
+                                    <img class="img-fluid" src="http://s3-eu-west-1.amazonaws.com/curriesprintcentre/Silverfern_logo.png" alt="First slide">
+                                    <p>
+                                        As a company we pride ourselves on carrying an attitude committed to excellence and we seek out providers we work with to have the same philosophy. Curries Print Centre carries that philosophy in every step of the print process from design, to production, to delivery and after the job is completed to ensure we are satisfied. The commitment to excellence shows in the quality &amp; consistency of their work every time.
+                                    </p>
+                                    <h4>Ryan Clayton  | <span> CEO  </span></h4>
+                                </div>
+
+                                <div class="carousel-item  testi-box">
+                                    <h1>  </h1>
+                                    <img class="img-fluid" src="http://s3-eu-west-1.amazonaws.com/curriesprintcentre/Aviagen_logo.png" alt="First slide">
+                                    <p>
+                                        “Curries Print Centre is a very loyal supplier and extremely flexible when it comes to meeting our design and print deadlines. Their design team is very creative and shows great dedication to the projects we pass their way”.
+                                    </p>
+                                    <h4>Sara Collins  | <span> European Marketing Manager  </span></h4>
+                                </div>
+
+                                <div class="carousel-item  testi-box">
+                                    <h1>  </h1>
+                                    <img class="img-fluid" src="http://s3-eu-west-1.amazonaws.com/curriesprintcentre/IC_Filling_logo.png" alt="First slide">
+                                    <p>
+                                        It’s always good to know you are dealing with professionals who understand the importance of accuracy, quality, and delivering to deadlines. So, very simply, thank you all. It really is appreciated.
+                                    </p>
+                                    <h4>David Petherick  | <span> Marketing Manager  </span></h4>
+                                </div>
+
+                            </div>
+                            <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">
+                                <span class="" aria-hidden="true"> <i class="fas fa-chevron-left"></i></span>
+                                <span class="sr-only">Previous</span>
+                            </a>
+                            <a class="carousel-control-next" href="#carouselExampleFade" role="button" data-slide="next">
+                                <span class="" aria-hidden="true"> <i class="fas fa-chevron-right"></i></span>
+                                <span class="sr-only">Next</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+              
+             
+        
+        <!-- our features-->
+        <!-- container to keep the position on page -->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">
+                                No hidden costs
+                            </h5>
+                            <p class="card-text">What you see is what you pay. We won’t come back to you with hidden charges..</p>
+                            <a href="#" class="btn btn-primary">Go somewhere</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">The Curries Promise</h5>
+                            <p class="card-text">To provide you with the highest quality print & service that you deserve.</p>
+                            <a href="#" class="btn btn-primary">Do you </a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Our green credentials</h5>
+                            <p class="card-text">Being green is extremely important to us and we love to encourage our customers to be too. We are proud to be a member of the Woodland Trust Carbon Capture Programme..</p>
+                            <a href="#" class="btn btn-primary">Need these</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
     </header>
     <div class="container">
         <main role="main" class="pb-3">
@@ -56,10 +507,180 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-white-50 bg-primary">
-        <div class="container">
-            &copy; 2020 - CPrint -
+    <!-- Footer -->
+    <footer class="page-footer font-small stylish-color-dark pt-4">
+
+        <!-- Footer Links -->
+        <div class="container-fluid text-center text-md-left">
+
+            <!-- Grid row -->
+            <div class="row">
+
+                <!-- Grid column -->
+                <div class="footercustom">
+                    <div class="col-md-4 mx-auto">
+
+                        <!-- Content -->
+                        <!-- this needs moved to the left -->
+                        <img class="imf-fluid footer-logo" style="align-items: flex-start" src="/images/curries_footer-logo-colour.png">
+
+                    </div>
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">ALL PRODUCTS</h5>
+                    <!-- Element for drawing a line-->
+                    <hr>
+                    <!-- ul.b is the style to use bullet points -->
+                    <ul.b>
+                        <li>
+                            <a href="#!">Business Cards</a>
+                        </li>
+                        <li>
+                            <a href="#!">Leaflets</a>
+                        </li>
+                        <li>
+                            <a href="#!">Folded Leaflets</a>
+                        </li>
+                        <li>
+                            <a href="#!">Our Booklets</a>
+                        </li>
+                        <li>
+                            <a href="#!">Large Format</a>
+                        </li>
+                        <li>
+                            <a href="#!">Letterheads</a>
+                        </li>
+                        <li>
+                            <a href="#!">Stationary</a>
+                        </li>
+                        <li>
+                            <a href="#!">Top Products</a>
+                        </li>
+                    </ul.b>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">About Us</h5>
+                    <hr>
+                    <!-- bullet points removed as it messes up the list -->
+                    <ul.b>
+                        <li>
+                            <a href="#!">Why choose Curries</a>
+                        </li>
+                        <li>
+                            <a href="#!">What our customers say</a>
+                        </li>
+                        <li>
+                            <a href="#!">Custom portal sites</a>
+                        </li>
+                        <li>
+                            <a href="#!">Automatic Ordering</a>
+                        </li>
+                        <li>
+                            <a href="#!">Templates</a>
+                        </li>
+                        <li>
+                            <a href="#!">Graphic Design Service</a>
+                        </li>
+                        <li>
+                            <a href="#!">Sign up for our new newsletter</a>
+                        </li>
+                    </ul.b>
+
+                </div>
+                <!-- Grid column -->
+
+                <hr class="clearfix w-100 d-md-none">
+
+                <!-- Grid column -->
+                <div class="col-md-2 mx-auto">
+
+                    <!-- Links -->
+                    <h5 class="font-weight-bold text-uppercase mt-3 mb-4">Help & Links</h5>
+                    <hr>
+                    <ul.b>
+                        <li>
+                            <a href="#!">Contact Us</a>
+                        </li>
+                        <li>
+                            <a href="#!">FAQ's</a>
+
+                            </ul>
+
+                </div>
+                <!-- Grid column -->
+
+            </div>
+            <!-- Grid row -->
+
         </div>
+        <!-- Footer Links -->
+
+        <hr>
+
+        <!-- Call to action -->
+        <ul class="list-unstyled list-inline text-center py-2">
+            <li class="list-inline-item">
+                <h5 class="mb-1">Register for free</h5>
+            </li>
+            <li class="list-inline-item">
+                <a href="#!" class="btn btn-danger btn-rounded">Sign up!</a>
+            </li>
+        </ul>
+        <!-- Call to action -->
+
+        <hr>
+
+        <!-- Social buttons -->
+        <ul class="list-unstyled list-inline text-center">
+            <li class="list-inline-item">
+                <a class="btn-floating btn-fb mx-1">
+                    <i class="fab fa-facebook-f"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-tw mx-1">
+                    <i class="fab fa-twitter"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-gplus mx-1">
+                    <i class="fab fa-google-plus-g"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-li mx-1">
+                    <i class="fab fa-linkedin-in"> </i>
+                </a>
+            </li>
+            <li class="list-inline-item">
+                <a class="btn-floating btn-dribbble mx-1">
+                    <i class="fab fa-dribbble"> </i>
+                </a>
+            </li>
+        </ul>
+        <!-- Social buttons -->
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3">
+            © 2020 Copyright:
+            <a href="#/"> P Hoben </a>
+        </div>
+        <!-- Copyright -->
+
     </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
@@ -72,7 +693,6 @@
     <!-- using my personal fontawesome kit code 03a46c7808-->
     <script src="https://kit.fontawesome.com/03a46c7808.js"></script>
     <!-- end of font awesome -->
-
     <!-- end of js utils -->
 
     @RenderSection("Scripts", required: false)

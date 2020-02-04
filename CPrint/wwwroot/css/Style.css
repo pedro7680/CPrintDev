@@ -1,0 +1,157 @@
+﻿body {
+    background-color: white;
+}
+
+h1 {
+    color: red;
+}
+
+.top-header {
+    display: inline-block;
+    background-color: #0c213a;
+    width: 100%;
+    height: 100px;
+}
+
+.pre-htext {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.pre-headre {
+    display: inline-block;
+    width: 100%;
+    background: #0c213a;
+}
+
+.pre-htext {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    color: white;
+}
+
+.ph-ul ul li {
+    display: inline-block;
+    padding: 0 14px;
+}
+
+.pre-headre {
+    height: 50;
+    background-color: blue;
+    width: 100%
+}
+
+footer {
+    background-color: #0c213a;
+    color: white;
+    width: 100%;
+    padding: 10px;
+}
+
+    footer h5 {
+        color: white;
+    }
+
+    footer hr {
+        border: 2px solid white;
+        border-radius: 5px;
+    }
+
+.footer-logo {
+    width: 180px;
+}
+
+.slider-text-header h1 {
+    color: black;
+    z-index: -1;
+}
+
+.sect1 {
+    color: white;
+}
+
+    .sect1 h1 {
+        color: black;
+    }
+
+    .sect1 p {
+        color: black;
+    }
+
+ul.b {
+    list-style-type: square;
+}
+
+.card-img-top {
+    width: 100%;
+    height: 15vw;
+    object-fit: cover;
+}
+
+
+
+.testi-cont {
+    width: 100%;
+    display: inline-block;
+    background-color: #ebedea;
+    /* background-image: url("../images/testi-img.jpg"); */
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+    min-height: 800px;
+    padding: 10px 0;
+    margin: 70px 0;
+}
+
+.testi-box {
+    padding: 5rem 12rem;
+    text-align: center;
+}
+
+    .testi-box h1 {
+        margin-top: 26px;
+        margin-bottom: 26px;
+        font-size: 40px;
+        font-weight: bold;
+        color: #0c213a;
+    }
+
+    .testi-box p {
+        font-size: 16px;
+        color: #000;
+        font-weight: 100;
+        font-style: italic;
+        line-height: 34px;
+        padding-bottom: 20px;
+        text-align: justify;
+    }
+
+    .testi-box img {
+        padding-bottom: 30px;
+        max-width: 200px;
+        max-height: 200px;
+    }
+
+    .testi-box h4 {
+        font-size: 18px;
+        font-weight: 500;
+    }
+
+        .testi-box h4 span {
+            font-weight: 100;
+        }
+
+
+.our-features .sample-pack {
+    margin: unset;
+    height: 100%;
+}

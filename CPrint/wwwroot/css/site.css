@@ -194,3 +194,36 @@ body {
     width: 210px !important;
     margin: 0 auto;
 }
+
+
+/* for the top header*/
+.pre-htext {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+
+.pre-headre {
+    display: inline-block;
+    width: 100%;
+    background: #0c213a;
+}
+
+.pre-htext {
+    display: flex;
+    width: 100%;
+    justify-content: space-between;
+    flex-wrap: wrap;
+}
+
+.ph-ul ul li {
+    display: inline-block;
+    padding: 0 14px;
+}
+/* for the top header*/
