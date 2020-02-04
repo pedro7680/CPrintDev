@@ -11,10 +11,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Data\Migrations\" />
-  </ItemGroup>
-
-  <ItemGroup>
     <ProjectReference Include="..\CPrint.Models\CPrint.Models.csproj" />
     <ProjectReference Include="..\CPrint.Utility\CPrint.Utility.csproj" />
   </ItemGroup>
