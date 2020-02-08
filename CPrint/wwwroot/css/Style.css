@@ -160,3 +160,22 @@ ul.b {
 .carbox{
     color:blue;
 }
+
+.carousel-caption h1 {
+    font-family: Garamond;
+    font-size: 3em;
+    color: black !important;
+    font-weight:500;
+}
+/* Description text */
+.carousel-caption p {
+    font-family: Garamond;
+    font-size: 2em;
+    color: black !important;
+}
+/* Button text */
+.carousel-caption .btn {
+    font-family: Garamond;
+    font-size: 1em;
+    color: yellow;
+}
