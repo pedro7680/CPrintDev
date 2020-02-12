@@ -3,7 +3,8 @@
 }
 
 h1 {
-    color: red;
+    color: black;
+    font-weight:bold;
 }
 
 .top-header {
@@ -29,6 +30,7 @@ h1 {
     display: inline-block;
     width: 100%;
     background: #0c213a;
+
 }
 
 .pre-htext {
@@ -37,6 +39,8 @@ h1 {
     justify-content: space-between;
     flex-wrap: wrap;
     color: white;
+    font-size:18px;
+    padding-top:5px;
 }
 
 .ph-ul ul li {
@@ -97,7 +101,21 @@ ul.b {
     object-fit: cover;
 }
 
+#features {
+    background: #0c213a;
+    color:white;
 
+   
+}
+    #features h5 {
+        text-align:center;
+        font-weight: bold;
+        font-size:28px;
+    }
+    #features p {
+        padding: 10px;
+        color: dimgrey;
+    }
 
 .testi-cont {
     width: 100%;
