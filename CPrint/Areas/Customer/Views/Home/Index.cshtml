@@ -72,20 +72,26 @@
         </a>
     </div>
 
-<h2 style="text-align: center;">Our Products</h2>
+    <br />
+    <br />
+
+<h2 style="text-align: center; font-weight:bold">Our Products</h2>
+<br />
 
 
 
-<!-- button group is fine for big screens, doesnt resize correctly-->
+
+<!-- button group is fine for big screens,  resize correctly for responisve-->
+<!-- set a media query for small screens to rearrange this. -->
 <div class="text-center">
-    <div class="btn-group btn-group-toggle" data-toggle="buttons">
-        <button type="button" class="btn btn-outline-primary btn-lg">Top Products</button>
-        <button type="button" class="btn btn-outline-dark btn-lg">Business Cards</button>
-        <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
-        <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
-        <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
-        <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
-        <button type="button" class="btn btn-outline-dark btn-lg">Large button</button>
+    <div class="btn-group btn-group-toggle " data-toggle="buttons">
+        <button type="button" class="btn btn-outline-dark ">Top Products</button>
+        <button type="button" class="btn btn-outline-dark ">Business Cards</button>
+        <button type="button" class="btn btn-outline-dark ">Stationary</button>
+        <button type="button" class="btn btn-outline-dark ">Leaflets & Folded Brochures</button>
+        <button type="button" class="btn btn-outline-dark ">Posters & Large Format</button>
+        <button type="button" class="btn btn-outline-dark ">Promotional</button>
+        
     </div>
 </div>
 
@@ -97,149 +103,269 @@
 <section>
 
     <!-- bg-light removed to set background to dark blue-->
+
+    
+
     <div class="album py-5 ">
         <div class="container">
 
             <div class="row">
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                            <p class="card-text text-center">Calendar Test</p>
+                    <div class="card border-light mb-3">
 
-                        </div>
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Calander Test</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Perfect Bound Booklets</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Backlit Graphics</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
                     </div>
                 </div>
 
+            </div>
+            <!-- end of first row of three-->
+            <br />
+            <div class="row">
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">PVC Banners</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Appointment Card</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Presentation Folder</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
                     </div>
                 </div>
 
+            </div>
+            <br />
+            <!-- end of row 2 of 3-->
+            <!-- beginning of a group of three cards -->
+            <div class="row">
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Strut Card</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Outdoor Posters</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
                     </div>
                 </div>
                 <div class="col-md-4">
-                    <div class="card mb-4 shadow-sm">
-                        <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail"><title>Placeholder</title><rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em">Thumbnail</text></svg>
-                        <div class="card-body">
-                            <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-                            <div class="d-flex justify-content-between align-items-center">
-                                <div class="btn-group">
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                    <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
-                                </div>
-                                <small class="text-muted">9 mins</small>
-                            </div>
-                        </div>
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Saddle Stitched Brouchure </button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
                     </div>
+                </div>
+
+            </div>
+            <br />
+            <!-- end of the row-->
+            <!-- beginning of a group of three cards -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">A Sized Stickers</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Large Indoor Posters</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Greetings Card </button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
+                    </div>
+                </div>
+
+            </div>
+            <br />
+            <!-- end of the row-->
+            <!-- beginning of a group of three cards -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Folded Leaflets</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Flat Leaflets & Flyers</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Compliment Slip </button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
+                    </div>
+                </div>
+
+            </div>
+            <br />
+            <!-- end of the row-->
+            <!-- beginning of a group of three cards -->
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Letterhead</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Foiled Luxe Business Cards</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
+                    </div>
+                </div>
+                <div class="col-md-4">
+                    <div class="card">
+
+                        <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                        <button type="button" class="btn btn-dark">Luxe Business Cards</button>
+                        <!-- if we want some text descriptio of the items. -->
+                        @*<div class="card-body">
+                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                        </div>*@
+                    </div>
+                </div>
+
+            </div>
+            <br />
+            <!-- end of the row-->
+
+            <div class="col-md-4">
+                <div class="card">
+
+                    <img src="~/Images/product/productImg.jpg" class="card-img-top" alt="...">
+                    <button type="button" class="btn btn-dark">Luxe Business Cards</button>
+                    <!-- if we want some text descriptio of the items. -->
+                    @*<div class="card-body">
+                        <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    </div>*@
                 </div>
             </div>
+
         </div>
+        <br />
+
+
+
     </div>
+    
 </section>
 
 
 <section>
-    <h1> testimonials require black arrows to cycle</h1>
+    
     <div class="testi-cont">
         <div class="container">
             <div class="row">
@@ -281,8 +407,10 @@
                             <p>
                                 It’s always good to know you are dealing with professionals who understand the importance of accuracy, quality, and delivering to deadlines. So, very simply, thank you all. It really is appreciated.
                             </p>
-                            <h4>David Petherick  | <span> Marketing Manager  </span></h4>
+                            <h4 style="font-weight:bold;">David Petherick  | <span> Marketing Manager  </span></h4>
                         </div>
+                        <!-- last testimonal shows bold for the name-->
+                        <!-- this could follow a better style using citation.-->
 
                     </div>
                     <a class="carousel-control-prev" href="#carouselExampleFade" role="button" data-slide="prev">

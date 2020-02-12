@@ -7164,8 +7164,8 @@ a.close.disabled {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     justify-content: center;
-    width: 15%;
-    color: #fff;
+    width: 25%;
+    color:black;
     text-align: center;
     opacity: 0.5;
     -webkit-transition: opacity 0.15s ease;
@@ -7183,7 +7183,7 @@ a.close.disabled {
 .carousel-control-prev:hover, .carousel-control-prev:focus,
 .carousel-control-next:hover,
 .carousel-control-next:focus {
-    color: #fff;
+    color: black;
     text-decoration: none;
     outline: 0;
     opacity: 0.9;
@@ -7200,8 +7200,8 @@ a.close.disabled {
 .carousel-control-prev-icon,
 .carousel-control-next-icon {
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 25px;
+    height: 25px;
     background: no-repeat 50% / 100% 100%;
 }
 
