@@ -1,0 +1,120 @@
+$(document).ready(function () {
+    $('#coupon-button').on('click', function (e) {
+        e.preventDefault();
+
+        var $form = $(this).parents('form');
+        var $input = $('#promoCodeNo');
+
+        if ($input.data('remove') == '1') {
+            $input.val('');
+        }
+
+        $form.submit();
+    });
+
+    $('#same-address-checkbox').on('click', function () {
+        var sameAddress = $(this).is(':checked');
+
+        if (sameAddress) {
+            $('#billing-address-wrapper').slideUp();
+        } else {
+            $('#billing-address-wrapper').slideDown();
+        }
+    });
+
+    $('.address-single div').on('click', function() {
+        $('.address-single div').not(this).removeClass('active');
+        $('#address-form [name="shippingAddressId"]').not(this).attr('checked', false);
+
+        if ($(this).hasClass('active')) {
+            $(this).removeClass('active');
+            $(this).find('[name="shippingAddressId"]').attr('checked', false);
+            $('.shipping-methods').hide();
+            $('.shipping-methods-message').show();
+        } else {
+            $(this).addClass('active');
+            $(this).find('[name="shippingAddressId"]').attr('checked', true);
+            $('.shipping-methods').show();
+            $('.shipping-methods-message').hide();
+        }
+    });
+
+    $('.add-new-address').on('click', function () {
+        if ($('.new-address-wrapper').is(':visible')) {
+            $('.new-address-wrapper').slideUp();
+            $('.new-address-wrapper [name="shippingAddressId"]').attr('checked', false);
+        } else {
+            $('.address-single div').removeClass('active');
+            $('#address-form [name="shippingAddressId"]').attr('checked', false);
+            $('.new-address-wrapper [name="shippingAddressId"]').attr('checked', true);
+
+            $('.new-address-wrapper').slideDown();
+        }
+    });
+
+    $('#save-address-button').on('click', function (e) {
+        e.preventDefault();
+
+        var formData = $('#address-form').serializeArray();
+
+        for (var i = 0; i < formData.length; i++) {
+            if (formData[i].name == 'action') {
+                formData[i].value = 'quote/validateAddress';
+
+                break;
+            }
+        }
+
+        $('.addressSec .alert').remove();
+        $('.has-error').removeClass('has-error');
+        $('.help-block').remove();
+
+        $.ajax({
+            url: '/',
+            method: 'POST',
+            data: formData,
+            success: function (response) {
+                if (response.error !== undefined) {
+                    addressErrors(response);
+                } else {
+                    $('#address-form').submit();
+                }
+            }
+        });
+    });
+});
+
+function addressErrors(response) {
+    $('.addressSec').prepend('\
+                        <div class="alert alert-danger" role="alert">\
+                            ' + response.error + '\
+                        </div>');
+
+    for (var property in response) {
+        if (response.hasOwnProperty(property)) {
+            if (response[property] instanceof Object) {
+                for (var _property in response[property]) {
+                    if (response[property].hasOwnProperty(_property)) {
+                        var $formGroup = $('#address-form [name="' + property + '[' + _property + ']"]').parents('.form-group');
+
+                        $formGroup.addClass('has-error');
+                        $formGroup.append('<small class="help-block">' + response[property][_property] + '</small>');
+                    }
+                }
+            } else {
+                var $formGroup = $('#address-form [name="' + property + '"]').parents('.form-group');
+
+                if ($formGroup.length == 0) {
+                    $formGroup = $('#address-form [name="' + property + '"]').parents('.form-check');
+                }
+
+                $formGroup.addClass('has-error');
+                $formGroup.append('<small class="help-block">' + response[property] + '</small>');
+            }
+        }
+    }
+
+    $('html, body').animate({
+        scrollTop: $('.addressSec').offset().top - 10
+    }, 500);
+}

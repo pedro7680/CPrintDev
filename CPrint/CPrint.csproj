@@ -27,6 +27,7 @@
 
   <ItemGroup>
     <Folder Include="Areas\Admin\Controllers\" />
+    <Folder Include="Areas\Customer\Views\Home\AboutUsDetails\" />
   </ItemGroup>
 
 </Project>

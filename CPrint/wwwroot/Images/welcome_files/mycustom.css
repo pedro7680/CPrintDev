@@ -1,0 +1,248 @@
+.abt-tab-wrapper {
+ overflow: hidden;
+}
+.quote-form-cont .btn:hover {
+ 
+  color: white;
+}
+.slick-slider {
+   overflow-y: auto;
+   overflow-x: hidden;
+
+}
+.slider-content {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    transform: translate(0%, -50%);
+    text-align: center;
+    vertical-align: middle;
+}
+.slider-text {
+    margin-left: 54vw;
+    width: 40vw;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.slider-text-header {
+    color: white;
+}
+.slider-text-body {
+    color: white;
+}
+@media(min-width: 600px)
+{
+    .slider-text-header {
+        font-size: 16px;
+    }
+    .slider-text-body {
+        font-size: 8px;
+    }
+}
+@media(min-width: 720px)
+{
+    .slider-text-header {
+        font-size: 18px;
+    }
+    .slider-text-body {
+        font-size: 10px;
+    }
+}
+@media(min-width: 960px)
+{
+    .slider-text-header {
+        font-size: 20px;
+    }
+    .slider-text-body {
+        font-size: 12px;
+    }
+}
+@media(min-width: 1200px)
+{
+    .slider-text-header {
+        font-size: 24px;
+    }
+    .slider-text-body {
+        font-size: 16px;
+    }
+}
+@media(min-width: 1500px)
+{
+    .slider-text-header {
+        font-size: 28px;
+    }
+    .slider-text-body {
+        font-size: 18px;
+    }
+}
+@media(max-width: 599px)
+{
+    .slider-text {
+        margin-left: 0vw;
+        width: 90vw;
+    }
+    .slider-text-header {
+        font-size: 16px;
+    }
+    .slider-text-body {
+        font-size: 8px;
+    }
+}
+@media(max-width: 399px)
+{
+    .slider-text {
+        margin-left: 0vw;
+        width: 90vw;
+    }
+    .slider-text-header {
+        font-size: 12px;
+    }
+    .slider-text-body {
+        font-size: 6px;
+    }
+}
+
+.slider-wrap {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    -webkit-box-pack: justify;
+        -ms-flex-pack: justify;
+            justify-content: space-between;
+    max-width: 1280px;
+    margin: 0px auto;
+}
+.slider-wrap .bnr-text {
+    text-align: center;
+    padding: 0 15px;
+    width: 50%;
+}
+
+.dropdown-toggle::after {
+	display: none;
+}
+
+.navbar-nav > li >.dropdown-menu {
+    color: #606060;
+    font-weight: 300;
+    font-size: 13px;
+    line-height: 30px;
+}
+.navbar-nav>li>.dropdown-menu {
+    margin-top: 0;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
+}
+.btn.btn-default {
+    background: #00aff0;
+    border: 1px solid #00aff0;
+    border-top-color: rgb(0, 200, 219);
+    border-right-color: rgb(0, 200, 219);
+    border-bottom-color: rgb(0, 200, 219);
+    border-left-color: rgb(0, 200, 219);
+    color: #fff;
+}
+.ctm-btn .btn-default {
+    top: 12px;
+    position: absolute;
+    right: 12px;
+}
+.ctm-btn .form-control {
+    padding-right: 44px;
+}
+
+.dropdown-menu {
+
+    border:0px;
+    box-shadow: 0 7px 9px rgba(0, 0, 0, 0.2);
+}
+.dropdown-menu {
+    right: 0px;
+    left: auto;
+    top: 66px;
+}
+
+
+.nav-item {
+   display: -webkit-box;
+   display: -ms-flexbox;
+   display: flex;
+   -ms-flex-wrap: wrap;
+       flex-wrap: wrap;
+   -webkit-box-pack: center;
+       -ms-flex-pack: center;
+           justify-content: center;
+
+}
+.nav-link.active {
+    color: #ef409d;
+}
+.navbar-nav .nav-link:hover, .navbar-nav .nav-link.active {
+    border-bottom: 1px solid #ef409d;
+}
+.navbar-nav .nav-link {
+    border-bottom: 1px solid transparent;
+}
+
+.success {
+  vertical-align: middle;
+  padding: 10px 10px;
+  color: green;
+/*  border: 1px solid;*/
+  margin-top: 20px !important;
+  display: inline-block;
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-left: 10px;
+}
+
+
+@media(max-width: 1199px)
+{
+.success {
+    font-size: 13px;
+    margin-left: 2px;
+}
+}
+
+@media(max-width: 991px)
+{
+.success {
+    margin-top: 10px !important;
+  }
+}
+.errors {
+
+    list-style-type: none;
+    padding: 0px;
+
+}
+.errors li {
+
+    color: red;
+    float: left;
+    font-size: 14px;
+    margin-left: 0px;
+
+}
+.hidden {
+    display: none !important;
+}
+.container1{
+  width:100% !important;
+}
+.nav-item a {
+
+    width: 100% !important;
+
+}
+@media (max-width: 767px) { 
+.abt-tab-wrapper #abt_tab .nav-item {
+    -webkit-box-flex: 1;
+        -ms-flex: 1 1 auto;
+            flex: 1 1 auto;
+}
+}

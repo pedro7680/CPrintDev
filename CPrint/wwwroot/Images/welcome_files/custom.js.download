@@ -1,0 +1,2007 @@
+var data = null;
+
+$(document).ready(function () {
+
+    $('.latestWorkContent').matchHeight();
+
+    $('.testimonialText').matchHeight();
+
+    $('#nav-icon').click(function () {
+        $(this).toggleClass('open');
+        $(".menuBar ul").slideToggle("slow");
+    });
+
+    $('.menuBar>ul>li.subMenu').click(function () {
+        $(this).toggleClass('open1');
+    });
+
+    $('.menu-has-children>li').click(function () {
+        e.preventDefault();
+        $(this).toggleClass('open1');
+    });
+
+    $('.sliderSec').slick({
+        cssEase: 'linear',
+        adaptiveHeight: true,
+        autoPlay: true,
+        autoplaySpeed: 2000,
+    });
+
+    $('.top-slider').slick({
+    });
+
+    $('.productSlider').slick({
+        arrows: true,
+        cssEase: 'linear',
+        //autoplay: true,
+        autoplaySpeed: 2000,
+    });
+
+    $('.feature-product-slider').slick({
+        arrows: true,
+        cssEase: 'linear',
+        autoplay: true,
+        autoplaySpeed: 2000,
+    });
+
+    $(".sec1 ul li h3").click(function () {
+        $(this).parent().toggleClass('active', 400);
+        //$(this).parent().children('.vidInnerText').toggle(500);
+        $(this).parent().siblings().find('.vidInnerText').hide(500);
+
+    });
+
+    $('.accorOuterOpt ul li a').on('click', function () {
+        $(this).parent('li').toggleClass('active1');
+        $(this).parent('li').siblings('li').removeClass('active1');
+        var a = $(this).attr("href");
+        $(a).siblings('.sec1').hide();
+        $(a).fadeIn();
+
+        return false;
+    });
+
+    //$('.chkLeft>div,.chkRight1').matchHeight();
+
+    if ($('#quote').length > 0) {
+
+        $.ajax({
+            url: quoteAPIUrl,
+            crossDomain:true,
+            success: function (response) {
+                response = JSON.parse(response);
+                data = response;
+
+                var names=$(".product_name");
+                for (var key in names) {
+                    names[key].innerHTML=data.name;
+                }
+                $('#quote-form [name="title"]').val(data.name);
+
+                loadFinishedSizes(response.finished_sizes);
+
+                if (response.orientation !== undefined) {
+                    loadOrientations(response.orientation);
+
+                    $('#orientations').removeClass('hidden');
+                }
+
+                if (response.folding !== undefined) {
+                    loadFoldings(response.folding);
+
+                    $('#foldings').removeClass('hidden');
+                }
+
+                if (response.binding_type !== undefined) {
+                    loadBindingType(response.binding_type);
+
+                    $('#binding-types').removeClass('hidden');
+                } else {
+                    $('.binding-type-special').val('Wire Bind');
+                }
+
+                if(response.ring_colour !== undefined) {
+                    loadRingColours(response.ring_colour);
+
+                    $('#ring-colours').removeClass('hidden');
+                }
+
+                if (response.binding_location !== undefined) {
+                    loadBindingLocations(response.binding_location);
+
+                    $('#binding-locations').removeClass('hidden');
+                }
+
+                if (response.acetate !== undefined) {
+                    loadAcetates(response.acetate);
+
+                    $('#acetates').removeClass('hidden');
+                }
+
+                if (response.calc_type == "booklet") {
+                    $('#printed-pages, #self-cover').removeClass('hidden');
+
+                    $('#orientations').addClass('temp');
+
+                    var $clone = $('#orientations').clone();
+
+                    $clone.removeClass('temp');
+
+                    $('#finished-sizes').before($clone);
+                    $('#orientations.temp').remove();
+                }
+
+                if(response.colour_inserts !== undefined) {
+                    loadCardInserts(response.colour_inserts);
+                }
+
+                if (response.calc_type == "large") {
+                    var weights = convertToWeights(response.paper_types[0].weights);
+
+                    $('#weights').attr('data-title', 'Paper type');
+                    $('#weights h4').text('Paper type');
+
+                    loadWeightsLargeFormat(weights, 'weight', '#weights', response.paper_types[0].icon);
+
+                    $('#weights').removeClass('hidden');
+                } else if (response.calc_type != "booklet") {
+                    loadPaperTypes(response.paper_types, 'paper-type', '#paper-types');
+                    loadWeights(response.weights, 'weight', '#weights');
+
+                    $('#paper-types').removeClass('hidden');
+                    $('#weights').removeClass('hidden');
+                } else {
+                    loadPaperTypes(response.paper_types, 'cover-paper-type', '#cover-paper-types');
+                    loadWeights(response.weights, 'cover-weight', '#cover-weights');
+
+                    $('#cover-paper-types').removeClass('hidden');
+                    $('#cover-weights').removeClass('hidden');
+
+                    $('#paper-types').attr('data-title', 'Inner paper type');
+                    $('#paper-types').find('h4').text('Inner paper type');
+
+                    $('#weights').attr('data-title', 'Inner weight');
+                    $('#weights').find('h4').text('Inner weight');
+
+                    loadPaperTypes(response.paper_types, 'paper-type', '#paper-types');
+                    loadWeights(response.inner_weights, 'weight', '#weights');
+
+                    $('#paper-types').removeClass('hidden');
+                    $('#weights').removeClass('hidden');
+                }
+
+                if (response.mounting_papers !== undefined && response.mounting_papers.length>0) {
+                    loadMountingPapers(response.mounting_papers.weights);
+
+                    $('#mounting-papers').removeClass('hidden');
+                }
+
+                if (response.colours !== undefined) {
+                    if (response.colours.front !== undefined) {
+                        loadColours(response.colours.front, 'front-colour', '#front-colours');
+
+                        $('#front-colours').removeClass('hidden');
+                    }
+
+                    if (response.colours.back !== undefined) {
+                        loadColours(response.colours.back, 'back-colour', '#back-colours');
+
+                        $('#back-colours').removeClass('hidden');
+                    }
+                }
+
+                if (response.cover_colours !== undefined) {
+                    loadColours(response.cover_colours.front, 'front-cover-colour', '#front-cover-colours');
+                    //loadColours(response.cover_colours.back, 'back-cover-colour', '#back-cover-colours');
+
+                    $('#front-cover-colours/*, #back-cover-colours*/').removeClass('hidden');
+                }
+
+                if (response.lamination !== undefined) {
+                    if (response.lamination.lamination !== undefined) {
+                        loadLaminations(response.lamination.lamination, 'lamination', '#laminations', true);
+
+                        $('#laminations').removeClass('hidden');
+                    }
+
+                    if (response.lamination.inner_lamination !== undefined) {
+                        loadLaminations(response.lamination.inner_lamination, 'inner-lamination', '#inner-laminations',
+                            false);
+
+                        $('#inner-laminations').removeClass('hidden');
+                    }
+
+                    if (response.lamination.cover_lamination !== undefined) {
+                        loadLaminations(response.lamination.cover_lamination, 'cover-lamination', '#cover-laminations',
+                            false);
+
+                        $('#cover-laminations').removeClass('hidden');
+                    }
+                }
+
+                clickEvents();
+
+                if (quoteId) {
+                    $.ajax({
+                        url: 'http://w2p.mycurriesprint.apptesting.online/api-get-quote-by-id',
+                        method: 'POST',
+                        data: {
+                            quote_id: quoteId
+                        },
+                        success: function (quoteData) {
+                            quoteData = JSON.parse(JSON.parse(quoteData).quote[0].values);
+
+                            for (var key in quoteData) {
+                                if (quoteData.hasOwnProperty(key)) {
+                                    if (key == 'quantity') {
+                                        $('#quantity').val(quoteData[key]);
+                                        $('#get-quote-button').trigger('click');
+                                    } else {
+                                        var elements = $('[name="' + key + '"]');
+
+                                        if (elements.length > 0) {
+                                            if (elements.first().attr('type') == 'radio') {
+                                                var $element = elements.filter('[value="' + quoteData[key] + '"]');
+
+                                                $element.siblings('.radioSel').trigger('click');
+                                                $element.attr('checked', true);
+
+                                                if (key == 'finished_size' && $element.val() == 'Custom size') {
+                                                    $('#custom-size-width').val(quoteData.item_width);
+                                                    $('#custom-size-height').val(quoteData.item_height);
+                                                }
+                                            } else if (elements.first().attr('type') == 'text') {
+                                                var $element = elements.first();
+
+                                                $element.val(quoteData[key]);
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        });
+
+        $('.next-button').on('click', function () {
+            var to = $(this).attr('data-to');
+
+            if (to !== undefined) {
+                $('.stepwizard-step a[href="#' + to + '"]').trigger('click');
+
+                $('html, body').animate({
+                    scrollTop: $('#' + to).offset().top - 10
+                }, 500);
+            }
+        });
+
+        $('.checkout-btn').on('click', function () {
+            if (isUserLoggedIn) {
+                $('.stepwizard-step a[href="#step-5"]').trigger('click');
+
+                $('html, body').animate({
+                    scrollTop: $('#step-5').offset().top - 10
+                }, 500);
+            } else {
+                $('.stepwizard-step a[href="#step-4"]').trigger('click');
+
+                $('html, body').animate({
+                    scrollTop: $('#step-4').offset().top - 10
+                }, 500);
+            }
+        });
+
+        $('.checkout-login-btn').on('click', function () {
+            var $parent = $('.quote-login .password').parent();
+
+            $parent.removeClass('has-error');
+            $parent.find('.help-block').remove();
+
+            $.ajax({
+                url: '/',
+                method: 'POST',
+                data: {
+                    action: 'users/login',
+                    CRAFT_CSRF_TOKEN: $('#quote-form [name="CRAFT_CSRF_TOKEN"]').val(),
+                    loginName: $('.quote-login .login-name').val(),
+                    password: $('.quote-login .password').val()
+                },
+                success: function (response) {
+                    if (response.error !== undefined) {
+                        $parent.addClass('has-error');
+                        $parent.append('<small class="help-block">' + response.error + '</small>');
+                    } else if (response.success !== undefined && response.success) {
+                        isUserLoggedIn = true;
+
+                        var newData = {seg2 : $('#additional-block-ajax').data('segment') , CRAFT_CSRF_TOKEN: $('#quote-form [name="CRAFT_CSRF_TOKEN"]').val()};
+                        $.post('/partials/currentUserInfo.html', newData, function (data) {
+                            $('#additional-block-ajax').append(data);
+                        });
+
+                        $('.stepwizard-step a[href="#step-5"]').trigger('click');
+
+                        $('html, body').animate({
+                            scrollTop: $('#step-5').offset().top - 10
+                        }, 500);
+
+                        $('.checkout-wrapper').show();
+                        $('.quote-login').hide();
+                    }
+                },
+                error: function (response) {
+                }
+            });
+        });
+
+        $('.save-quote-login-btn').on('click', function () {
+            var $parent = $('.save-quote-login .password').parent();
+
+            $parent.removeClass('has-error');
+            $parent.find('.help-block').remove();
+
+            $.ajax({
+                url: '/',
+                method: 'POST',
+                data: {
+                    action: 'users/login',
+                    CRAFT_CSRF_TOKEN: $('#quote-form [name="CRAFT_CSRF_TOKEN"]').val(),
+                    loginName: $('.save-quote-login .login-name').val(),
+                    password: $('.save-quote-login .password').val()
+                },
+                success: function (response) {
+                    if (response.error !== undefined) {
+                        $parent.addClass('has-error');
+                        $parent.append('<small class="help-block">' + response.error + '</small>');
+                    } else if (response.success !== undefined && response.success) {
+                        isUserLoggedIn = true;
+
+                        saveQuote();
+                    }
+                },
+                error: function (response) {
+                }
+            });
+        });
+
+        $('#get-quote-button').on('click', function () {
+            $('#quantity').parents('.control-group').removeClass('has-error');
+            $('#quantity').parent().find('.help-block').remove();
+            $('#printed-pages').removeClass('has-error');
+            $('#printed_pages').parent().find('.help-block').remove();
+            $('.total-cost').hide();
+            $('.total-cost .amount').attr('data-amount', '');
+
+            if (!$('#printed-pages').hasClass('hidden') && $('#printed_pages').val() == '') {
+                $('#printed-pages').addClass('has-error');
+                $('#printed_pages').parent().append('<small class="help-block">The printed pages is required.</small>');
+            }
+
+            if ($('#quantity').val() == '') {
+                $('#quantity').parents('.control-group').addClass('has-error');
+                $('#quantity').parent().append('<small class="help-block">The quantity is required.</small>');
+            } else {
+                getQuote();
+            }
+        });
+
+        $('#checkout-guest').on('click', function (e) {
+            var data = {
+                isGuest: true
+            };
+
+            $('.stepwizard-step a[href="#step-5"]').trigger('click', data);
+
+            $('html, body').animate({
+                scrollTop: $('#step-5').offset().top - 10
+            }, 500);
+        });
+
+        if ($('#due_date').length > 0) {
+            $('#due_date').datepicker();
+        }
+
+        $('#add-to-cart-button').on('click', function () {
+            removeErrors();
+
+            if (validateCheckoutInfo()) {
+
+                // ---
+                var formData = new FormData();
+                // var fileName = $('#file-1')[0].files[0].name;
+
+                // formData.append('fields[files][]', $('#file-1')[0].files[0], fileName);
+                formData.append('CRAFT_CSRF_TOKEN', $('#quote-form [name="CRAFT_CSRF_TOKEN"]').val());
+                // formData.append('action', '/quote/validateFile');
+
+                $.ajax({
+                    url: '/',
+                    method: 'POST',
+                    data: formData,
+                    processData: false,
+                    contentType: false,
+                    beforeSend: function () {
+                        $('#add-to-cart-button').attr('disabled', true).text('Loading...');
+                    },
+                    success: function (response) {
+                        if (response.error !== undefined) {
+                            alert(response.error);
+
+                            $('#add-to-cart-button').attr('disabled', false).text('Add to cart');
+                        } else {
+                            var formData = getQuoteFormData();
+
+                            $.ajax({
+                                url: '/',
+                                method: 'post',
+                                data: formData,
+                                beforeSend: function () {
+                                    $('#add-to-cart-button').attr('disabled', true).text('Loading...');
+                                },
+                                success: function (response) {
+                                    if (response.id) {
+                                        $('#purchasableId').val(response.id);
+                                        $('.last-quote-sku').val(response.sku);
+
+                                        updateCart(response.sku);
+                                    }
+                                },
+                                error: function () {
+                                    $('#add-to-cart-button').attr('disabled', false).text('Add to cart');
+                                }
+                            });
+                        }
+                    },
+                    error: function (response) {
+                        $('#add-to-cart-button').attr('disabled', false).text('Add to cart');
+                    }
+                });
+                // ---
+            }
+        });
+
+        $('#save-quote-button').on('click', function () {
+            var message = validateStep4();
+
+            if (message == '') {
+                if (!isUserLoggedIn) {
+                    $('.checkout-wrapper').hide();
+                    $('.save-quote-login').show();
+                } else {
+                    saveQuote();
+                }
+            } else {
+                alert(message);
+            }
+        });
+    }
+
+    if ($('.products-list').length > 0) {
+        var heights = [];
+
+        $('.products-list li').each(function () {
+            heights.push($(this).outerHeight());
+        });
+
+        var height = Math.max.apply(Math, heights);
+
+        $('.products-list li').css('height', height);
+    }
+
+    $('.find_address').on('click', function(e) {
+        e.preventDefault();
+
+        $.ajax({
+            type: 'POST',
+            url: apiUrl+'/address/find-address',
+            data: {'post_code': $('#zipCode').val(), 'house-no': $('#house_no').val()},
+            success:function(data) {
+
+                if(data.status == 'error') {
+                    alert('Address not found, please enter manually');
+                }
+
+
+                if(data.status == 'ok') {
+
+                    $('#address1').val( $('#house_no').val() + " " + data.address.Address1);
+                    $('#address2').val(data.address.Address2);
+                    $('#city').val(data.address.Town);
+                }
+
+                $('.hidden-address-field').show();
+                $('.find_address').hide();
+                $('.house_no').hide();
+            }
+        });
+    });
+
+    $('#paymentMethodId').on('change', function(e) {
+        e.preventDefault();
+        $('#paymentMethod').submit();
+    });
+});
+
+$('.stepwizard-step a').on('click', function (e, data) {
+    var isGuest = false;
+
+    if (data !== undefined && data.isGuest) {
+        isGuest = true;
+    }
+
+    if ($(this).attr('href') == '#step-5' && (!isUserLoggedIn && !isGuest)) {
+        $('.checkout-wrapper').hide();
+        $('.quote-login').show();
+        $('.match-height').matchHeight();
+
+        return;
+    }
+
+    if($(this).attr('href') == '#step-5') {
+        $.ajax({
+            type:'GET',
+            url:'/get-artwork-email-id',
+            success: function(data) {
+                $('#item_unq_id').val(data.number);
+                $('#artwork_id_text').text('"' + data.number + '"');
+            }
+        });
+    }
+
+    if ($(this).attr('href') == '#step-4') {
+        $('.checkout-wrapper').show();
+        $('.quote-login').hide();
+        $('.save-quote-login').hide();
+    }
+
+    var message = window[$(this).attr('data-trigger')]();
+
+    if (message != '') {
+        alert(message);
+    } else {
+        $('.stepwizard-step').removeClass('active2');
+        $(this).parent('.stepwizard-step').toggleClass('active2');
+        var a = $(this).attr("href");
+        $(a).siblings('.setup-content').hide();
+        $(a).fadeIn();
+
+        return false;
+    }
+});
+
+function loadFinishedSizes(finishedSizes) {
+    for(var i = 0; i < finishedSizes.length; i++) {
+        var finishedSize = finishedSizes[i];
+
+        //check if the product has a custom size option
+        if(finishedSize.name == 'custom_size') {
+
+
+            //add custom finished size
+            var $clone = $('.finished-size.prototype').clone();
+
+            $clone.removeClass('hidden prototype');
+            $clone.find('input').attr('id', 'finished-size-custom').val('Custom size');
+
+            $clone.find('label')
+                .attr('for', 'finished-size-custom')
+                .attr('data-value', 'Custom size').addClass('paperSize1');
+
+            //loadIcon($clone.find('label'), finishedSize.icon);
+
+            $clone.find('span').text('Custom size');
+            $('#finished-sizes').append($clone);
+
+        } else {
+
+            var $clone = $('.finished-size.prototype').clone();
+
+            $clone.removeClass('hidden prototype');
+            $clone.find('input')
+                .attr('id', 'finished-size-' + slugify(finishedSize.display_name))
+                .val(finishedSize.display_name)
+                .attr('data-width', finishedSize.width)
+                .attr('data-height', finishedSize.height);
+
+            $clone.find('label')
+                .attr('for', 'finished-size-' + slugify(finishedSize.display_name))
+                .attr('data-value', finishedSize.display_name);
+
+            loadIcon($clone.find('label'), finishedSize.flat_icon);
+
+            $clone.find('span').text(finishedSize.display_name);
+            $('#finished-sizes').append($clone);
+        }
+    }
+}
+
+function loadCardInserts (items) {
+    for(var i =0; i < items.length; i++) {
+        var colour = items[i];
+        var $clone = $('.colour_insert.prototype').clone();
+        var value = colour;
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', 'inser_col-' + colour).val(colour);
+        $clone.find('label').attr('for', 'inser_col-' + colour).addClass(colour).attr('data-value', value);
+        $clone.find('span').text(value);
+
+        $('#colour_inserts').append($clone);
+    }
+}
+
+function loadOrientations(orientations) {
+    for(var i = 0; i < orientations.length; i++) {
+        var orientation = orientations[i].name;
+
+        var $clone = $('.orientation.prototype').clone();
+        var value = orientation.charAt(0).toUpperCase() + orientation.slice(1);
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', 'orientation-' + orientation).val(orientation);
+        $clone.find('label').attr('for', 'orientation-' + orientation).addClass(orientation).attr('data-value', value);
+        $clone.find('span').text(value);
+
+        loadIcon($clone.find('label'), orientation + ".png");
+
+        $('#orientations').append($clone);
+    }
+}
+
+function loadFoldings(foldings) {
+    for(var i = 0; i < foldings.values.length; i++) {
+        var folding = foldings.values[i];
+        var $clone = $('.folding.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', 'folding-' + slugify(folding.name)).val(folding.name);
+        $clone.find('label').attr('for', 'folding-' + slugify(folding.name)).attr('data-value', folding.name);
+        $clone.find('span').text(folding.name);
+
+        loadIcon($clone.find('label'), folding.icon);
+
+        $('#foldings').append($clone);
+    }
+}
+
+function loadBindingType(bindingTypes) {
+    for(var i = 0; i < bindingTypes.length; i++) {
+        var bindingType = bindingTypes[i];
+        var $clone = $('.binding-type.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', 'binding-type-' + bindingType.value).val(bindingType.name);
+        $clone.find('label').attr('for', 'binding-type-' + bindingType.value)
+            .attr('data-value', bindingType.name);
+        $clone.find('span').text(bindingType.name);
+
+        loadIcon($clone.find('label'), bindingType.icon);
+
+        $('#binding-types').append($clone);
+    }
+}
+
+function loadRingColours(ringSizes) {
+    for(var i = 0; i < ringSizes.length; i++) {
+        var ringSize = ringSizes[i];
+        var $clone = $('.ring-colour.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', 'ring-colour-' + ringSize.value).val(ringSize.name);
+        $clone.find('label').attr('for', 'ring-colour-' + ringSize.value)
+            .attr('data-value', ringSize.name);
+        $clone.find('span').text(ringSize.name);
+
+        loadIcon($clone.find('label'), ringSize.icon);
+
+        $('#ring-colours').append($clone);
+    }
+}
+
+function loadBindingLocations(bindingLocations) {
+    for(var i = 0; i < bindingLocations.length; i++) {
+        var bindingLocation = bindingLocations[i];
+        var $clone = $('.binding-location.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', 'binding-location-' + slugify(bindingLocation.name)).val(bindingLocation.name);
+        $clone.find('label').attr('for', 'binding-location-' + slugify(bindingLocation.name))
+            .attr('data-value', bindingLocation.name);
+        $clone.find('span').text(bindingLocation.name);
+
+        loadIcon($clone.find('label'), bindingLocation.icon);
+
+        $('#binding-locations').append($clone);
+    }
+}
+
+function loadAcetates(acetates) {
+    for(var i = 0; i < acetates.length; i++) {
+        var acetate = acetates[i];
+        var $clone = $('.acetate.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', 'acetate-' + slugify(acetate)).val(acetate);
+        $clone.find('label').attr('for', 'acetate-' + slugify(acetate)).attr('data-value', acetate);
+        $clone.find('span').text(acetate);
+        $('#acetates').append($clone);
+    }
+}
+
+function loadPaperTypes(paperTypes, className, wrapperId) {
+    for(var i = 0; i < paperTypes.length; i++) {
+        var paperType = paperTypes[i];
+        var $clone = $('.' + className + '.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', className + '-' + paperType.id).val(paperType.id);
+        $clone.find('label').attr('for', className + '-' + paperType.id).attr('data-value', paperType.name);
+        $clone.find('span').text(paperType.name);
+
+        loadIcon($clone.find('label'), paperType.icon);
+
+        $(wrapperId).append($clone);
+    }
+}
+
+function loadLuxuryPapers(luxuryPapers) {
+    $('.luxury-paper:not(.prototype)').remove();
+
+    for(var i = 0; i < luxuryPapers.length; i++) {
+        var luxuryPaper = luxuryPapers[i];
+        var $clone = $('.luxury-paper.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', 'luxury-paper-' + luxuryPaper.paper_id).val(luxuryPaper.paper_id);
+        $clone.find('label').attr('for', 'luxury-paper-' + luxuryPaper.paper_id).attr('data-value', luxuryPaper.name);
+        $clone.find('span').text(luxuryPaper.name);
+        $('#luxury-papers').append($clone);
+    }
+}
+
+function loadWeights(weights, className, wrapperId) {
+    for(var i = 0; i < weights.length; i++) {
+        var weight = weights[i];
+        var $clone = $('.' + className + '.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', className + '-' + weight);
+        $clone.find('label').attr('for', className + '-' + weight).attr('data-value', weight);
+        $clone.find('span').text(weight);
+        $clone.find('span.weight-val').text(weight);
+
+        // loadIcon($clone.find('label'), weight + "gsm.png");
+        loadIcon($clone.find('label'), "gsm.png");
+
+        $(wrapperId).append($clone);
+    }
+}
+
+function loadMountingPapers(mountingPapers) {
+    for(var i = 0; i < mountingPapers.length; i++) {
+        var mountingPaper = mountingPapers[i];
+        var $clone = $('.mounting-paper.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', 'mounting-paper-' + mountingPaper.paper_id).val(mountingPaper.paper_id);
+        $clone.find('label').attr('for', 'mounting-paper-' + mountingPaper.paper_id).
+        attr('data-value', mountingPaper.name);
+        $clone.find('span').text(mountingPaper.name);
+
+        $('#mounting-papers').append($clone);
+    }
+
+    var $clone = $('.mounting-paper.prototype').clone();
+
+    $clone.removeClass('hidden prototype');
+    $clone.find('input').attr('id', 'mounting-paper-none').val('No mounting');
+    $clone.find('label').attr('for', 'mounting-paper-none').attr('data-value', 'No mounting');
+    $clone.find('span').text('No mounting');
+    $('#mounting-papers').append($clone);
+}
+
+function loadColours(colours, className, wrapperId) {
+    for(var i = 0; i < colours.length; i++) {
+        var colour = colours[i];
+        var $clone = $('.' + className + '.prototype').clone();
+        var name = colour.name.replace(/ /g, '-');
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', className + '-' + name).val(colour.value);
+        $clone.find('label').attr('for', className + '-' + name).attr('data-value', colour.name);
+        $clone.find('span').text(colour.name);
+
+        loadIcon($clone.find('label'), colour.icon);
+
+        $(wrapperId).append($clone);
+    }
+}
+
+function loadLaminations(laminations, className, wrapperId, showLaminationName) {
+    for(var i = 0; i < laminations.length; i++) {
+        var lamination = laminations[i];
+
+        for(var j = 0; j < lamination.types.length; j++) {
+            var type = lamination.types[j];
+
+            var $clone = $('.' + className + '.prototype').clone();
+            var value = (showLaminationName ? lamination.name + ' ' : '') + type.name;
+
+            $clone.removeClass('hidden prototype');
+            $clone.find('input').attr('id', className + '-' + type.id).val(type.id)
+                .attr('data-side', lamination.name).attr('data-type', type.name);
+            $clone.find('label').attr('for', className + '-' + type.id).attr('data-value', value);
+            $clone.find('span').text(value);
+            $(wrapperId).append($clone);
+
+            loadIcon($clone.find('label'), type.icon);
+        }
+    }
+}
+
+function invalidatePrice() {
+    $('.total-cost .amount').attr('data-amount', '');
+
+    $('.total-cost').hide();
+    $('.total-weight').hide();
+
+    // reomve the quote stuff from the price retrieval
+    // ensure that the calc looks like its a new thing
+}
+
+function clickEvents() {
+
+    $('.radioSel').on('click', function(e) {
+        if ($(this).parent().hasClass('orientation')) {
+            var result = validateOrientation();
+
+            if (!result) {
+                e.preventDefault();
+
+                return;
+            }
+        } else if ($(this).parent().hasClass('folding')) {
+            var result = validateFolding();
+
+            if (!result) {
+                e.preventDefault();
+
+                return;
+            }
+        } /*else if ($(this).parent().hasClass('printed-size')) {
+            var result = validatePrintedSize();
+
+            if (!result) {
+                e.preventDefault();
+
+                return;
+            }
+        }*/ else if ($(this).parent().hasClass('weight')) {
+            var result = validateWeight();
+
+            if (!result) {
+                e.preventDefault();
+
+                return;
+            }
+        } else if ($(this).parent().hasClass('binding-location')) {
+            var result = validateBindingLocation();
+
+            if (!result) {
+                e.preventDefault();
+
+                return;
+            }
+        }
+
+        invalidatePrice();
+
+        var type = $(this).attr('data-type');
+        var to = $(this).parents('.setup-content').attr('id');
+        var toElement = $(this).parents('.yourSizeSec').attr('id');
+
+        if ($(this).siblings('input').attr('disabled') == false || $(this).siblings('input').attr('disabled') == undefined) {
+            createRightSummaryItem(type, toElement, to, $(this));
+            createSummaryItem(type, toElement, to, $(this));
+        }
+    });
+
+    $('.finished-size .radioSel').on('click', function () {
+        var finishedSizes = data.finished_sizes;
+        var orientations = [];
+
+        var name = $(this).siblings('input').val();
+
+        invalidatePrice();
+
+        if (name == 'Custom size') {
+            $('.custom-size').show();
+        } else {
+            $('.custom-size').hide();
+        }
+
+        for(var i = 0; i < finishedSizes.length; i++) {
+            if (finishedSizes[i].name == name && finishedSizes[i].orientations !== undefined) {
+                orientations = finishedSizes[i].orientations;
+
+                break;
+            }
+        }
+
+        if (orientations.length > 0) {
+            $('#orientations input').each(function () {
+                var exists = false;
+
+                for(var i = 0; i < orientations.length; i++) {
+                    if ($(this).attr('value') == orientations[i].name) {
+                        exists = true;
+
+                        break;
+                    }
+                }
+
+                if (!exists) {
+                    $(this).attr('disabled', true);
+                    $(this).attr('checked', false);
+                } else {
+                    $(this).attr('disabled', false);
+                }
+            });
+        }
+
+    });
+
+    $('.paper-type .radioSel').on('click', function () {
+
+        invalidatePrice();
+
+        if($(this).attr('data-value') == 'Triple Stock') {
+            toggleInsertColours($(this));
+            filterWeights($(this), '#weights');
+        } else {
+
+            toggleLuxuryTypes($(this));
+            filterWeights($(this), '#weights');
+        }
+    });
+
+    $('.cover-paper-type .radioSel').on('click', function () {
+        filterWeights($(this), '#cover-weights');
+    });
+
+    $(document).on('click', '.summary-item .edit', function() {
+        var to = $(this).attr('data-to');
+        var toElement = $(this).attr('data-to-element');
+
+        $('.stepwizard-step a[href="#' + to + '"]').trigger('click');
+
+        $('html, body').animate({
+            scrollTop: $('#' + toElement).offset().top - 10
+        }, 500);
+    });
+
+    $(document).on('click', '.typeOfPaper .inner', function(e) {
+        e.preventDefault();
+
+        var to = $(this).attr('data-to');
+        var toElement = $(this).attr('data-to-element');
+
+        $('.stepwizard-step a[href="#' + to + '"]').trigger('click');
+
+        $('html, body').animate({
+            scrollTop: $('#' + toElement).offset().top - 10
+        }, 500);
+    });
+
+    $('.printed-pages-input').on('focusout', function() {
+        var type = $(this).attr('data-type');
+        var toElement = 'printed-pages';
+        var to = $(this).parents('.setup-content').attr('id');
+        var $this = $(this);
+
+        var number = parseInt($(this).val());
+        var modulus = (4 - number % 4) % 4;
+
+        // check if the modulus of 4 is higher than 0 if so means that the number specified by the user is not a multiple of 4
+        // need to add the remainder because that number has to be multiple of 4
+        if(modulus > 0) {
+            number += modulus;
+            $(this).val(number);
+        }
+
+        $.ajax({
+            url: '/binding-type-validation.json',
+            success: function (response) {
+                var message = validatePrintedPages(response, number);
+
+                if (message !== '') {
+                    alert(message);
+
+                    $('#quantity, #get-quote-button, #save-quote-button, #order-now-button').attr('disabled', true);
+                } else {
+                    $('#quantity, #get-quote-button, #save-quote-button, #order-now-button').attr('disabled', false);
+                    $this.attr('data-value', number);
+
+                    createRightSummaryItem(type, toElement, to, $this);
+                    createSummaryItem(type, toElement, to, $this);
+
+                    $('#cover_pp').val(4);
+
+                    if($('#self-cover-checkbox').is(':checked')) {
+                        $('#inner_pp').val(number);
+                    } else {
+                        $('#inner_pp').val(number - 4);
+                    }
+                }
+            }
+        });
+
+        // -------------------------------------------------------------
+    });
+
+    $('#self-cover-checkbox').on('change', function(e) {
+        e.preventDefault();
+
+        if(this.checked === true) {
+            $('#cover-paper-types').addClass('hidden');
+            $('#cover-weights').addClass('hidden');
+            $('#front-cover-colours').addClass('hidden');
+            $('#back-cover-colours').addClass('hidden');
+
+            $('#inner_pp').val($('#printed-pages input').val());
+
+            $('.typeOfPaper').find('[data-to-element="cover-paper-types"]').addClass('hidden');
+            $('.typeOfPaper').find('[data-to-element="cover-weights"]').addClass('hidden');
+            $('.typeOfPaper').find('[data-to-element="front-cover-colours"]').addClass('hidden');
+            $('.typeOfPaper').find('[data-to-element="back-cover-colours"]').addClass('hidden');
+
+            $('.summary-item[data-type="cover-paper-type"]').addClass('hidden');
+            $('.summary-item[data-type="cover-weight"]').addClass('hidden');
+            $('.summary-item[data-type="front-cover-colour"]').addClass('hidden');
+            $('.summary-item[data-type="back-cover-colour"]').addClass('hidden');
+        } else {
+            $('#cover-paper-types').removeClass('hidden');
+            $('#cover-weights').removeClass('hidden');
+            $('#front-cover-colours').removeClass('hidden');
+            $('#back-cover-colours').removeClass('hidden');
+
+            $('#inner_pp').val(($('#printed-pages input').val() - 4));
+
+            $('.typeOfPaper').find('[data-to-element="cover-paper-types"]').removeClass('hidden');
+            $('.typeOfPaper').find('[data-to-element="cover-weights"]').removeClass('hidden');
+            $('.typeOfPaper').find('[data-to-element="front-cover-colours"]').removeClass('hidden');
+            $('.typeOfPaper').find('[data-to-element="back-cover-colours"]').removeClass('hidden');
+
+            $('.summary-item[data-type="cover-paper-type"]').removeClass('hidden');
+            $('.summary-item[data-type="cover-weight"]').removeClass('hidden');
+            $('.summary-item[data-type="front-cover-colour"]').removeClass('hidden');
+            $('.summary-item[data-type="back-cover-colour"]').removeClass('hidden');
+        }
+    });
+
+    $('.cover-weight label').on('click', function () {
+        var weight = parseInt($(this).attr('data-value'));
+
+        if (weight <= 200) {
+            $('.cover-lamination input').attr('disabled', true);
+            $('.cover-lamination input').attr('checked', false);
+
+            removeFromRightSummary('cover-lamination');
+            removeFromSummary('cover-lamination');
+        } else {
+            $('.cover-lamination input').attr('disabled', false);
+        }
+    });
+
+
+    $(document).on('click', '.weight label', function () {
+    // $('.weight label').on('click', function () {
+        // if (data.calc_type == "booklet") {
+            var weight = parseInt($(this).attr('data-value'));
+
+            if (weight <= 200) {
+                $('.inner-lamination input').attr('disabled', true);
+                $('.inner-lamination input').attr('checked', false);
+
+                removeFromRightSummary('inner-lamination');
+                removeFromSummary('inner-lamination');
+
+                $('.lamination input').attr('disabled', true);
+                $('.lamination input').attr('checked', false);
+
+                removeFromRightSummary('lamination');
+                removeFromSummary('lamination');
+
+            } else {
+                $('.inner-lamination input').attr('disabled', false);
+                $('.lamination input').attr('disabled', false);
+            }
+        // }
+    });
+
+    $('.orientation label').on('click', function () {
+        var $bindingType = $('.binding-type input:checked');
+
+        disableA4Size($(this), 'Landscape', $bindingType, 'Stapled');
+    });
+
+    $('.binding-type label').on('click', function () {
+        var $orientation = $('.orientation input:checked');
+
+        disableA4Size($(this), 'Stapled', $orientation, 'landscape');
+    });
+}
+
+function validateOrientation() {
+    if ($('.finished-size input:checked').length == 0 && data.calc_type != "booklet") {
+        alert('Please choose a size first.');
+
+        return false;
+    }
+
+    return true;
+}
+
+function validateStep1() {
+    var hasFinishedSize = $('.finished-size input:checked').length > 0;
+
+    if (!hasFinishedSize) {
+        return 'Please choose a size first.';
+    } else {
+        if ($('.finished-size input:checked').val() == 'Custom size') {
+            var width = $('#custom-size-width').val();
+
+            if (width == '') {
+                return 'Please specify the width.';
+            } else if (isNaN(parseFloat(width))) {
+                return 'The width must be a number value.';
+            } else if (data.min_size.width !== '' && width < parseFloat(data.min_size.width)) {
+                return 'The width must be at least ' + parseFloat(data.min_size.width) + 'mm.';
+            } else if (data.max_size.width !== '' && width > parseFloat(data.max_size.width)) {
+                return 'The width must be at most ' + parseFloat(data.max_size.width) + 'mm.';
+            }
+
+            var height = $('#custom-size-height').val();
+
+            if (height == '') {
+                return 'Please specify the height.';
+            } else if (isNaN(parseFloat(height))) {
+                return 'The height must be a number value.';
+            } else if (data.min_size.height !== '' && height < parseFloat(data.min_size.height)) {
+                return 'The height must be at least ' + parseFloat(data.min_size.height) + 'mm.';
+            } else if (data.max_size.height !== '' && height > parseFloat(data.max_size.height)) {
+                return 'The height must be at most ' + parseFloat(data.max_size.height) + 'mm.';
+            }
+        }
+    }
+
+    if (data.orientation !== undefined) {
+        var hasOrientation = $('.orientation input:checked').length > 0;
+
+        if (!hasOrientation) {
+            return 'Please choose an orientation first.';
+        }
+    }
+
+    if (data.binding_type !== undefined) {
+        var hasBindingType = $('.binding-type input:checked').length > 0;
+
+        if (!hasBindingType) {
+            return 'Please choose a binding type first.';
+        }
+    }
+
+    if (data.binding_location !== undefined) {
+        var hasBindingLocation = $('.binding-location input:checked').length > 0;
+
+        if (!hasBindingLocation) {
+            return 'Please choose a binding location first.';
+        }
+    }
+
+    if (data.acetate !== undefined) {
+        var hasAcetate = $('.acetate input:checked').length > 0;
+
+        if (!hasAcetate) {
+            return 'Please choose an acetate first.';
+        }
+    }
+
+    return '';
+}
+
+function validateStep2() {
+    var hasPaperType = $('.paper-type input:checked').length > 0;
+    var hasWeight = $('.weight input:checked').length > 0;
+
+    if (data.calc_type != "large" && !hasPaperType) {
+        return 'Please choose a paper type first.';
+    }
+
+    if (!hasWeight) {
+        return 'Please choose a weight first.';
+    }
+
+    if (data.mounting_papers !== undefined && data.mounting_papers.length>0) {
+        if ($('.mounting-paper input:checked').length == 0) {
+            return 'Please choose a mounting paper first.';
+        }
+    }
+
+    if (data.colours !== undefined) {
+        if (data.colours.front !== undefined) {
+            if ($('.front-colour input:checked').length == 0) {
+                return 'Please choose a front colour first.';
+            }
+        }
+
+        if (data.colours.back !== undefined) {
+            if ($('.back-colour input:checked').length == 0) {
+                return 'Please choose a back colour first.';
+            }
+        }
+    }
+
+    if (data.cover_colours !== undefined && !$('#self-cover-checkbox').is(':checked')) {
+        if ($('.front-cover-colour input:checked').length == 0) {
+            return 'Please choose a front cover colour first.';
+        }
+
+        /*if ($('.back-cover-colour input:checked').length == 0) {
+            return 'Please choose a back cover colour first.';
+        }*/
+    }
+
+    if (data.lamination !== undefined) {
+        if (data.lamination.lamination !== undefined) {
+
+            var weightElement = $('input[name=weight]:checked').attr('id');
+            var weightVal = $('[for='+ weightElement +']').data('value');
+
+            if ($('.lamination input:checked').length == 0) {
+
+                if(weight <= 200) {
+                    return 'Please choose a lamination first.';
+                }
+            }
+        }
+
+        if (data.lamination.inner_lamination !== undefined) {
+            var $input = $('.inner-lamination input:checked');
+            var $innerWeight = $('.weight input:checked');
+            var weight = parseInt($innerWeight.siblings('label').attr('data-value'));
+
+            if ($input.length == 0 && weight > 200) {
+                return 'Please choose an inner lamination first.';
+            }
+        }
+
+        if (data.lamination.cover_lamination !== undefined) {
+            var $input = $('.cover-lamination input:checked');
+            var $coverWeight = $('.cover-weight input:checked');
+            var weight = parseInt($coverWeight.siblings('label').attr('data-value'));
+
+            if ($input.length == 0 && weight > 200) {
+                return 'Please choose a cover lamination first.';
+            }
+        }
+    }
+
+    $('.quantitySec').removeClass('hidden');
+
+    return '';
+}
+
+function validateStep4() {
+    if (!$('#printed-pages').hasClass('hidden') && $('#printed_pages').val() == '') {
+        return 'Please specify the printed pages quantity.';
+    }
+
+    if ($('#quantity').val() == '') {
+        return 'Please specify a quantity.';
+    }
+
+    if ($('.total-cost .amount').attr('data-amount') == '') {
+        return 'Please get a quote price first.';
+    }
+
+    if ($('.quote-name').val() == '') {
+        return 'Please provide a quote name first.';
+    }
+
+    return '';
+}
+
+function validateCheckoutInfo() {
+    var validated = true;
+
+    // if ($("#file-1").val() == ''){
+    //     alert('Please select a file first.');
+
+    //     validated = false;
+    // }
+
+    return validated;
+}
+
+function validate() {
+    return '';
+}
+
+function validatePrintedSize() {
+    if ($('.finished-size input:checked').length == 0) {
+        alert('Please choose a size first.');
+
+        return false;
+    }
+
+    if (data.orientation !== undefined) {
+        if ($('.orientation input:checked').length == 0) {
+            alert('Please choose an orientation first.');
+
+            return false;
+        }
+    }
+
+    return true;
+}
+
+function validateWeight() {
+    if (data.calc_type != "large" && $('.paper-type input:checked').length == 0) {
+        alert('Please choose a paper type first.');
+
+        return false;
+    }
+
+    return true;
+}
+
+function validateFolding() {
+    if ($('.finished-size input:checked').length == 0) {
+        alert('Please choose a size first.');
+
+        return false;
+    }
+
+    if ($('.orientation input:checked').length == 0) {
+        alert('Please choose an orientation first.');
+
+        return false;
+    }
+
+    return true;
+}
+
+function validateBindingLocation() {
+    // if ($('.binding-type input:checked').length == 0) {
+    //     alert('Please choose a binding type first.');
+
+    //     return false;
+    // }
+
+    return true;
+}
+
+function slugify(text)
+{
+    return text.toString().toLowerCase()
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-')         // Replace multiple - with single -
+        .replace(/^-+/, '')             // Trim - from start of text
+        .replace(/-+$/, '');            // Trim - from end of text
+}
+
+function getQuote() {
+    var requestData = getQuoteData();
+
+    requestData = JSON.stringify(requestData);
+
+    $.ajax({
+        url: apiUrl+ '/api-calculate-price',
+        method: 'POST',
+        async: false,
+        data: {
+            data: requestData
+        },
+        success: function (response) {
+            response = JSON.parse(response);
+
+            var priceDigital = null;
+            var priceLitho = null;
+            var price = 0;
+
+            if (response.digi !== undefined && response.litho !== undefined) {
+                // Exposes the quote POST response to the window for use in the Vue.js app.
+                window.formParameters.width = Number(response.digi['item-width']);
+                window.formParameters.height = Number(response.digi['item-height']);
+
+                priceDigital = response.digi.price;
+                priceLitho = response.litho.price;
+
+                $('.total-weight').show();
+
+                if (priceLitho ===  undefined || priceDigital <= priceLitho) {
+                    price = priceDigital;
+                    data.production_time = response.digi.production_time;
+                    data.delivery_time = response.digi.delivery_time;
+
+                    $('.total-weight #job-weight').text(response.digi.job_weight);
+
+                    setPrintMethod('digi');
+                } else {
+                    price = priceLitho;
+                    data.production_time = response.litho.production_time;
+                    data.delivery_time = response.litho.delivery_time;
+
+
+                    $('.total-weight #job-weight').text(response.litho.job_weight);
+
+                    setPrintMethod('litho');
+                }
+            } else {
+                price = response[0].price;
+                data.production_time = response[0].production_time;
+                data.delivery_time = response[0].delivery_time;
+
+                setPrintMethod(response[0].printMethod);
+            }
+
+            $('.total-cost .amount').attr('data-amount', price);
+
+            if(coefficient){
+                price = price * coefficient;
+            }
+
+
+            price = price.toLocaleString('en-GB', { style: 'currency', currency: 'GBP' });
+
+            $('.total-cost .amount').html(price);
+            $('.total-cost').show();
+        }
+    });
+}
+
+function setPrintMethod(printMethod) {
+    data.print_method = printMethod;
+}
+
+function getQuoteData() {
+    var finishedSize = $('.finished-size input:checked').val();
+    var width = null;
+    var height = null;
+
+    if (finishedSize == 'Custom size') {
+        width = parseFloat($('#custom-size-width').val());
+        height = parseFloat($('#custom-size-height').val());
+    } else {
+        width = $('.finished-size input:checked').attr('data-width');
+        height = $('.finished-size input:checked').attr('data-height');
+    }
+
+    var requestData = {
+        'qty': $('#quantity').val(),
+        'product_id': parentId,
+        'item_width': width,
+        'item_height': height,
+        'paper_id': $('.weight input:checked').val(),
+        'weight': 60, // TODO,
+        'unq_id': $('#item_unq_id').val()
+    };
+
+    if (data.colours !== undefined && data.colours.front !== undefined) {
+        var colour = $('.front-colour input:checked').val().split('/');
+
+        requestData.colour_front = colour[0];
+        requestData.colour_back = colour[1];
+    }
+
+    /*if (data.colours !== undefined && data.colours.back !== undefined) {
+        requestData.colour_back = $('.back-colour input:checked').val();
+    }*/
+
+    if (data.orientation !== undefined) {
+        requestData.orientation = $('.orientation input:checked').val();
+    }
+
+    if (data.cover_colours !== undefined) {
+        if (!$('#self-cover-checkbox').is(':checked')) {
+            if (data.cover_colours.front !== undefined) {
+                var coverColour = $('.front-cover-colour input:checked').val().split('/');
+
+                requestData.cover_col_front = coverColour[0];
+                requestData.cover_col_back = coverColour[1];
+            }
+
+            requestData.cover_paper_id = $('.cover-weight input:checked').val();
+        }
+        else {
+            requestData.cover_col_front = '';
+            requestData.cover_col_back = '';
+            requestData.cover_paper_id = '';
+        }
+
+        requestData.cover_pp = $('#cover_pp').val();
+        requestData.inner_pp = $('#inner_pp').val();
+    }
+
+    if (data.lamination !== undefined && data.lamination.inner_lamination !== undefined) {
+        var $input = $('.inner-lamination input:checked');
+
+        if ($input.length > 0) {
+            requestData.inner_lamination = $input.val();
+        } else {
+            requestData.inner_lamination = '';
+        }
+    }
+
+    if (data.lamination !== undefined && data.lamination.cover_lamination !== undefined) {
+        var $input = $('.cover-lamination input:checked');
+
+        if ($input.length > 0) {
+            requestData.cover_lamination = $input.val();
+        } else {
+            requestData.cover_lamination = '';
+        }
+    }
+
+    if (data.lamination !== undefined && data.lamination.lamination !== undefined) {
+        requestData.lamination_type = $('.lamination input:checked').attr('data-type');
+        requestData.lamination_side = $('.lamination input:checked').attr('data-side');
+    }
+
+    if (data.mounting_papers !== undefined) {
+        if ($('.mounting-paper input:checked').val() !== 'No mounting') {
+            requestData.mounting_id = $('.mounting-paper input:checked').val();
+        } else {
+            requestData.mounting_id = '';
+        }
+    }
+
+    //check if its a booklet type
+    if (data.calc_type == "booklet") {
+        requestData.printed_pages = $('#printed-pages input').val();
+
+        //if its booklet and there is no binding types
+        if (data.binding_type == undefined) {
+            requestData.binding_type = $('.binding-type-special').val();
+        }
+
+        //half the width of the booklet
+        requestData.item_width = requestData.item_width / 2;
+    }
+
+    if (data.press_id !== undefined) {
+        requestData.press_id = data.press_id;
+    }
+
+    if (data.print_method !== undefined) {
+        requestData.print_method = data.print_method;
+    }
+
+    if (data.binding_type !== undefined) {
+        requestData.binding_type = $('.binding-type input:checked').val();
+    }
+
+    if (data.binding_location !== undefined) {
+        requestData.binding_location = $('.binding-location input:checked').val();
+    }
+
+    if (data.acetate !== undefined) {
+        requestData.acetate = $('.acetate input:checked').val();
+    }
+
+    if (data.folding !== undefined) {
+        requestData.folding = $('.folding input:checked').val();
+    }
+
+    if (data.production_time !== undefined) {
+        requestData.production_time = data.production_time;
+    }
+
+    if (data.delivery_time !== undefined) {
+        requestData.delivery_time = data.delivery_time;
+    }
+
+    if (data.ring_colour !== undefined) {
+        requestData.ring_colour = $('.ring-colour input:checked').val();
+    }
+
+    if(data.colour_insert !== undefined) {
+        requestData.colour_insert = $('.colour_insert input:checked').val();
+    }
+
+    return requestData;
+}
+
+function createSummaryItem(type, toElement, to, $element) {
+    var $summaryItem = $('.summary-item[data-type="' + type + '"]');
+    var icon = $element.attr('data-icon');
+
+    if ($summaryItem.length > 0) {
+        $summaryItem.find('.title').text($element.attr('data-value'));
+
+        if(icon !== undefined) {
+            loadIcon($summaryItem.find('.summaryBlk'), icon);
+        } else {
+            $summaryItem.find('.summaryBlk').css('background-image', $element.css('background-image'));
+        }
+    } else {
+        var $clone = $('.summary-item.prototype').clone();
+
+        $clone.find('.title').text($element.attr('data-value'));
+        $clone.attr('data-type', type);
+        $clone.find('.edit').attr('data-to', to).attr('data-to-element', toElement);
+
+        if(icon !== undefined) {
+            loadIcon($clone.find('.summaryBlk'), icon);
+        } else {
+            $clone.find('.summaryBlk').css('background-image', $element.css('background-image'));
+        }
+
+        $clone.removeClass('prototype hidden');
+
+        $('#summary-wrapper').append($clone);
+    }
+}
+
+function createRightSummaryItem(type, toElement, to, $el) {
+    if ($('.typeOfPaper').find('a[data-type="' + type + '"]').length > 0) {
+        var $element = $('.typeOfPaper').find('a[data-type="' + type + '"]');
+
+        $element.find('span').text($el.attr('data-value'));
+    } else {
+        var $clone = $('.typeOfPaper .prototype').clone();
+        var title = $el.parents('.yourSizeSec').attr('data-title');
+
+        if (title === undefined) {
+            title = $el.attr('data-title');
+        }
+
+        $clone.find('.title').text(title);
+        $clone.find('span').text($el.attr('data-value'));
+        $clone.find('a').attr('data-type', type);
+        $clone.find('.inner').attr('data-to', to).attr('data-to-element', toElement);
+
+        $('.typeOfPaper').append($clone.html());
+    }
+}
+
+function filterWeights($element, weightsId) {
+    $('.weight input').val('');
+
+    var paperTypes = data.paper_types;
+    var weights = [];
+    var type = '';
+
+    var id = $element.siblings('input').val();
+
+    for(var i = 0; i < paperTypes.length; i++) {
+        if (paperTypes[i].id == id) {
+            weights = paperTypes[i].weights;
+
+            break;
+        }
+    }
+
+    $(weightsId + ' input').each(function () {
+        var exists = false;
+        type = $(this).siblings('label').attr('data-type');
+        var weightId = $(this).attr('id') ? $(this).attr('id') : '';
+        var weightValue = parseInt(weightId.replace(type + '-', ''));
+        var paperId = '';
+
+        for(var i = 0; i < weights.length; i++) {
+            if (weightValue == weights[i].weight) {
+                exists = true;
+                paperId = weights[i].paper_id;
+
+                break;
+            }
+        }
+
+        if (!exists) {
+            $(this).attr('disabled', true);
+            $(this).attr('checked', false);
+        } else {
+            $(this).attr('disabled', false);
+            $(this).val(paperId);
+        }
+    });
+
+    if ($(weightsId + ' input:checked').length == 0) {
+        removeFromRightSummary(type);
+        removeFromSummary(type);
+    }
+}
+
+function toggleInsertColours($element) {
+    // if ($element.attr('data-value') == 'Triple Stock') {
+
+        $('.CarInsertsTextInner').slideDown();
+        $('#colour_inserts').removeClass('hidden');
+
+
+        //hide luxury papers
+        $('.paperTypeTextInner').slideUp();
+        $('#luxury-papers').addClass('hidden');
+
+        // if (!$('#' + $element.attr('for')).is(':checked')) {
+        //     var luxuryPapers = [];
+
+        //     for(var i = 0; i < data.paper_types.length; i++) {
+        //         if (data.paper_types[i].name == 'Luxury Paper') {
+        //             luxuryPapers = data.paper_types[i].weights;
+
+        //             break;
+        //         }
+        //     }
+
+        //     if (luxuryPapers) {
+        //         $('.paperTypeTextInner').slideDown();
+        //         loadLuxuryPapers(luxuryPapers);
+        //         $('#luxury-papers').removeClass('hidden');
+        //         filterWeightsByLuxuryPaper();
+        //     }
+        // }
+    // } else {
+        // $('.CarInsertsTextInner').slideUp();
+        // $('#colour_inserts').addClass('hidden');
+    // }
+}
+
+function toggleLuxuryTypes($element) {
+    if ($element.attr('data-value') == 'Luxury Paper') {
+
+        $('.CarInsertsTextInner').slideUp();
+        $('#colour_inserts').addClass('hidden');
+
+
+        if (!$('#' + $element.attr('for')).is(':checked')) {
+            var luxuryPapers = [];
+
+            for(var i = 0; i < data.paper_types.length; i++) {
+                if (data.paper_types[i].name == 'Luxury Paper') {
+                    luxuryPapers = data.paper_types[i].weights;
+
+                    break;
+                }
+            }
+
+            if (luxuryPapers) {
+                $('.paperTypeTextInner').slideDown();
+                loadLuxuryPapers(luxuryPapers);
+                $('#luxury-papers').removeClass('hidden');
+                filterWeightsByLuxuryPaper();
+            }
+        }
+    } else {
+        $('.paperTypeTextInner').slideUp();
+        $('#luxury-papers').addClass('hidden');
+
+        $('.CarInsertsTextInner').slideUp();
+        $('#colour_inserts').addClass('hidden');
+    }
+}
+
+function filterWeightsByLuxuryPaper() {
+    $('.luxury-paper label').on('click', function () {
+        $('.weight input').val('');
+
+        var id = $(this).siblings('input').val();
+        var paperTypes = data.paper_types;
+        var weight = null;
+
+        for(var i = 0; i < paperTypes.length; i++) {
+            if (paperTypes[i].name == 'Luxury Paper') {
+                var weights = paperTypes[i].weights;
+
+                for (var j = 0; j < weights.length; j++) {
+                    if (weights[j].paper_id == id) {
+                        weight = weights[j];
+
+                        break;
+                    }
+                }
+
+                if (weight) break;
+            }
+        }
+
+        $('.weight').each(function () {
+            var $input = $(this).find('input');
+
+            var weightId = $input.attr('id') ? $input.attr('id') : '';
+            var weightValue = parseInt(weightId.replace('weight-', ''));
+
+            if (weightValue == weight.weight) {
+                $input.attr('checked', true).attr('disabled', false);
+                $input.val(weight.paper_id);
+            } else {
+                $input.attr('checked', false).attr('disabled', true);
+            }
+        });
+    });
+}
+
+function convertToWeights(paperWeights) {
+    var weights = [];
+
+    for (var i = 0; i < paperWeights.length; i++) {
+        var weight = {
+            weight: paperWeights[i].label,
+            paper_id: paperWeights[i].paper_id
+        };
+
+        weights.push(weight);
+    }
+
+    return weights;
+}
+
+function updateCart(lastQuoteSku) {
+    var myForm = document.getElementById('update-cart');
+    var formData = new FormData(myForm);
+    // var fileName = $('#file-1')[0].files[0].name;
+
+    formData.append('fields[test2]', 'test2');
+    // formData.append('fields[files][]', $('#file-1')[0].files[0], lastQuoteSku + '_' + fileName);
+
+    $.ajax({
+        url: '',
+        method: 'POST',
+        data: formData,
+        processData: false,
+        contentType: false,
+        success: function (response) {
+            window.onbeforeunload = null;
+            location.href = '/cart';
+        },
+        error: function () {
+            $('#add-to-cart-button').attr('disabled', false).text('Add to cart');
+        }
+    });
+}
+
+function removeErrors() {
+    $('.has-error').removeClass('has-error');
+    $('.help-block').addClass('hidden');
+}
+
+function saveQuote() {
+    $.ajax({
+        url: '/user/info.json',
+        success: function (response) {
+            var userId = response.id;
+
+            // TODO: Save quote and go to user's quotes page
+            var data = getQuoteFormDataJSON();
+
+            $.ajax({
+                // url: 'http://w2p.mycurriesprint.apptesting.online/api-save-quote',
+                url: apiUrl+'/api-save-quote',
+                method: 'POST',
+                data: {
+                    values: data,
+                    user_id: userId,
+                    quote_name: $('#quote_name').val()
+                },
+                success: function (response) {
+                    window.onbeforeunload = null;
+                    location.href = '/account/dashboard#my-quotes';
+                },
+                error: function (response) {
+                }
+            });
+        },
+        error: function (response) {
+        }
+    });
+}
+
+function getQuoteFormData() {
+    var $form = $('#quote-form');
+    var quoteData = getQuoteData();
+    var total = $('.total-cost .amount').attr('data-amount');
+
+    for (var key in quoteData) {
+        if (quoteData.hasOwnProperty(key)) {
+            $form.append('<input type="hidden" name="' + key + '" value="' + quoteData[key] + '">');
+        }
+    }
+
+    $form.append('<input type="hidden" name="price" value="' + total + '">');
+    $form.append('<input type="hidden" name="product_slug" value="' + slug + '">');
+
+    return $form.serializeArray();
+}
+
+function getQuoteFormDataJSON() {
+    var data = getQuoteFormData();
+    var array = {};
+    var namesToIgnore = ['action', 'CRAFT_CSRF_TOKEN'];
+
+    for(var i = 0; i < data.length; i++) {
+        var element = data[i];
+
+        if (namesToIgnore.indexOf(element.name) == -1) {
+            array[element.name] = element.value;
+        }
+    }
+
+    return JSON.stringify(array);
+}
+
+function loadIcon($element, icon) {
+
+    $element.css({
+        'background-image': 'url(' + s3Bucket + icon + ')',
+        'background-position': 'center 26px',
+        'background-size': 'auto'
+    }).attr('data-icon', icon);
+}
+
+function loadWeightsLargeFormat(weights, className, wrapperId, icon) {
+    for(var i = 0; i < weights.length; i++) {
+        var weight = weights[i];
+        var $clone = $('.' + className + '.prototype').clone();
+
+        $clone.removeClass('hidden prototype');
+        $clone.find('input').attr('id', className + '-' + weight.paper_id).val(weight.paper_id);
+        $clone.find('label').attr('for', className + '-' + weight.paper_id).attr('data-value', weight.weight);
+        $clone.find('label').addClass("largePaper");
+        $clone.find('span.weight-val').text(weight.weight);
+
+        loadIcon($clone.find('label'), icon);
+
+        $(wrapperId).append($clone);
+    }
+}
+
+function removeFromRightSummary(type) {
+    var $summaryItem = $('.typeOfPaper').find('a[data-type="' + type + '"]');
+
+    if ($summaryItem.length > 0) {
+        $summaryItem.closest('.inner').remove();
+    }
+}
+
+function removeFromSummary(type) {
+    var $summaryItem = $('.summary-item[data-type="' + type + '"]');
+
+    if ($summaryItem.length > 0) {
+        $summaryItem.remove();
+    }
+}
+
+function disableA4Size($element, elementValue, $otherElement, otherElementValue) {
+    if ($element.attr('data-value') == elementValue) {
+        if ($otherElement.length > 0 && $otherElement.val() == otherElementValue) {
+            $('#finished-size-a4').attr('disabled', true).attr('checked', false);
+
+            removeFromRightSummary('finished-size');
+            removeFromSummary('finished-size');
+        }
+    } else {
+        $('#finished-size-a4').attr('disabled', false);
+    }
+}
+
+function validatePrintedPages(response, number) {
+
+    var bindingType = $('.binding-type input:checked').attr('id').replace('binding-type-', '');
+
+    var weight = $('.weight input:checked').next().attr('data-value');
+
+    var weights = response[bindingType];
+    var pageLimit = weights[weight];
+
+    if (pageLimit !== undefined) {
+        if (number < pageLimit.min || number > pageLimit.max) {
+            return 'The page limit for ' + bindingType + ' is between ' + pageLimit.min + ' and ' + pageLimit.max + " please change the binding type";
+        }
+    }
+
+    return '';
+}
