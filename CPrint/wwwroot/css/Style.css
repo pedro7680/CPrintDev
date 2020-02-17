@@ -25,21 +25,22 @@ h1 {
     -ms-flex-wrap: wrap;
     flex-wrap: wrap;
 }
-
+/
 .pre-headre {
     display: inline-block;
     width: 100%;
     background: #0c213a;
+    
 
 }
 
 .pre-htext {
     display: flex;
     width: 100%;
-    justify-content: space-between;
+    /*justify-content: space-between;*/
     flex-wrap: wrap;
     color: white;
-    font-size:18px;
+    /*font-size:18px;*/
     padding-top:5px;
 }
 
