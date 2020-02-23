@@ -7,6 +7,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CPrint.DataAccess.Data
 {
+    // using identityDbContext to all users and logins. 
     public class ApplicationDbContext : IdentityDbContext
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
@@ -16,6 +17,7 @@ namespace CPrint.DataAccess.Data
     }
 
         // add category to the db table 
+        // all futher tables are added as dbsets. 
         public DbSet<Category> Categories { get; set; }
     }
 }
