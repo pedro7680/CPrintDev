@@ -227,3 +227,34 @@ body {
     padding: 0 14px;
 }
 /* for the top header*/
+
+.navLinks{
+    color:black !important;
+    
+}
+
+.aboutTab li {
+    line-height: 2.5em;
+    height: auto;
+    color: black;
+    display: table;
+    margin: 0px auto 0px auto;
+}
+
+.badge {
+    height: 100px;
+    width: 100px;
+    display: table-cell;
+    text-align: center;
+    vertical-align: middle;
+    border-radius: 50%; /* may require vendor prefixes */
+    background: #0C213A;
+
+    
+
+    
+}
+
+.badge p {
+    color:white;
+}
